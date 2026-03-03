@@ -19,7 +19,7 @@ class LinkedListTests {
 	@BeforeEach
 	void setUp() throws Exception {
 		// Create your concrete linked list class and assign to to linkedList.
-		//this.linkedList = new SLL();
+		this.linkedList = new SLL();
 	}
 
 	/**
