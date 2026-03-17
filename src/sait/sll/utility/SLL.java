@@ -1,5 +1,7 @@
 package sait.sll.utility;
 import java.io.Serializable;
+
+import org.w3c.dom.Node;
 //SLL = singly linked list
 public class SLL implements LinkedListADT, Serializable {
 	private Node head;
@@ -73,32 +75,83 @@ public class SLL implements LinkedListADT, Serializable {
     	return node.getData();
     }
 	
-	//NEXT METHODS (NOT DONE YET) these are just place holders so the code compiles for my stuff 
+	
     @Override
+    // adds a new node at a specific position in the list
     public void insert(Object data, int index) {
-        throw new UnsupportedOperationException(); // Will implement later
+    	if (index < 0 || index > size) { // this should check if the index is outside the valid range
+    		throw new IndexOutOfBoundsException(); // is this the exception we want to use for all of them?
+   }
+    	  if (index == 0) { //if we are inserting at the begining, we can reuse the prepend function from earlier 
+    	        prepend(data);
+    	        return;
+    	    }
+
+    	    Node newNode = new Node(data); // This should hold the data
+
+    	    Node previous = getNode(index - 1); // this finds the node before the insert position 
+    	    newNode.setNext(previous.getNext()); // new node points to the nextr node in the list 
+    	    previous.setNext(newNode); // this should make the previous node point to the new node
+
+    	    size++; // increase list size by 1
     }
 
     @Override
-    public void replace(Object data, int index) {
-        throw new UnsupportedOperationException(); // Will implement later
+    // This should replace the data at a specific index
+    public void replace(Object data, int index) { 
+        Node node = getNode(index);   // get the node at that index
+        node.setData(data);           // update the data at that node
     }
 
     @Override
+    // this will remove a node at a specific index
     public void delete(int index) {
-        throw new UnsupportedOperationException(); // Will implement later
+        if (index < 0 || index >= size) { // make surte the index is in the valid range of our list
+            throw new IndexOutOfBoundsException(); // repeated exception 
+        }
+        
+        // If we want to remove the first node
+        if (index == 0) {
+            head = head.getNext(); // move the head to the next node
+            size--; // reduce the list size
+            return;
+        }
+
+        Node previous = getNode(index - 1); // find the node before the one we want to delete
+        Node toDelete = previous.getNext(); // this will be the node we are removing 
+
+        previous.setNext(toDelete.getNext());
+        // This should skip the deleted node and reconnect the list again
+
+        size--; // we have to reduce the list size when deleting 
     }
 
 
-
     @Override
+    // This should search the list and return the index of matching data
     public int indexOf(Object data) {
-        throw new UnsupportedOperationException(); // Will implement later
+        Node current = head; // start at the first node
+        int index = 0; // should keep track of the position in the list
+
+        // this should move through the list until it reaches the end
+        while (current != null) {
+            if (current.getData().equals(data)) { // checks if the data matches
+                return index;
+                // this should return the index where it found the data 
+            }
+
+            current = current.getNext(); // moves to the next node
+            index++; // this should increase the index counter
+        }
+
+        return -1 ; // a placeholder for if data isnt found. it compiles wrong with a string so I just made it a negative number
     }
 
     @Override
+    // checks if the list contains a specific value
     public boolean contains(Object data) {
-        throw new UnsupportedOperationException(); // Will implement later
+        return indexOf(data) != -1;
+        // if the index returns the data, return truw to confirm
     }
 }
 
