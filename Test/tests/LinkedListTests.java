@@ -245,4 +245,27 @@ class LinkedListTests {
 		String value = (String) this.linkedList.retrieve(1);
 		assertEquals("b", value);
 	}
+	
+// Create our tests below here to try for the new methods we created in the SLL file
+	
+	@Test
+	void testInsertAtBeginning() {
+		this.linkedList.append("d");
+		this.linkedList.append("c");
+	    this.linkedList.append("b");
+	    this.linkedList.insert("a", 0);
+
+	    /**
+	     * Linked list should now be:
+	     * 
+	     * a -> d -> c -> b
+	     */
+
+	    assertEquals("a", this.linkedList.retrieve(0));
+	    assertEquals("d", this.linkedList.retrieve(1));
+	    assertEquals("c", this.linkedList.retrieve(2));
+	    assertEquals("b", this.linkedList.retrieve(3));
+	}
+		
+	}
 }

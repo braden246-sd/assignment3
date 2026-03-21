@@ -1,7 +1,5 @@
 package sait.sll.utility;
 import java.io.Serializable;
-
-import org.w3c.dom.Node;
 //SLL = singly linked list
 public class SLL implements LinkedListADT, Serializable {
 	private Node head;
