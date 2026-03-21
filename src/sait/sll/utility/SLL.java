@@ -2,6 +2,7 @@ package sait.sll.utility;
 import java.io.Serializable;
 //SLL = singly linked list
 public class SLL implements LinkedListADT, Serializable {
+	private static final long serialVersionUID = 1L;
 	private Node head;
 	private int size;
 	
