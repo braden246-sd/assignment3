@@ -180,14 +180,16 @@ public class SLL implements LinkedListADT, Serializable {
     public int indexOf(Object data) {
         Node current = head; 
         int index = 0; 
-		
-        if ((current.getData() == null && data == null) ||
-			(current.getData() != null && current.getData().equals(data))) {
-			return index;
-		}
+
+		while (current !=null) {
+	        if ((current.getData() == null && data == null) ||
+				(current.getData() != null && current.getData().equals(data))) {
+				return index;
+			}
 		
             current = current.getNext(); 
-            index++; 
+            index++;
+		}
 
         return -1 ; 
     }
