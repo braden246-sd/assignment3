@@ -13,8 +13,8 @@ public class User implements Serializable {
 	
 	private String email;
 	
-	private String password;
-	
+	private transient String password;
+
 	/**
 	 * Initializes a User object.
 	 * @param id ID
@@ -52,6 +52,38 @@ public class User implements Serializable {
 	public String getEmail() {
 		return this.email;
 	}
+
+	  /**
+     * Sets the user's ID.
+     * @param id ID
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    /**
+     * Sets the user's name.
+     * @param name Name
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * Sets the user's email.
+     * @param email E-mail address
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    /**
+     * Sets the user's password.
+     * @param password Password
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
 	
 	/**
 	 * Checks if the passed password is correct.
