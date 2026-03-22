@@ -1,156 +1,207 @@
 package sait.sll.utility;
+
 import java.io.Serializable;
-//SLL = singly linked list
+
+/**
+ * Implements a singly linked list.
+ */
 public class SLL implements LinkedListADT, Serializable {
 	private static final long serialVersionUID = 1L;
 	private Node head;
 	private int size;
-	
-	public SLL() { //constructor to create an empty linked list 
-		this.head = null; //first node in the linked list (null means the list is empty)
-		this.size = 0; //list starts with size oif 0
+
+	 /**
+     * Constructs an empty singly linked list.
+     */
+	public SLL() { 
+		this.head = null; 
+		this.size = 0; 
 	} 
 	
+	 /**
+     * Checks if the list is empty.
+     * @return true if the list contains no elements
+     */
 	@Override
-	public boolean isEmpty() { //returns TRUE if list has no elements 
-		return size == 0; //if size is 0, list is empty
+	public boolean isEmpty() { 
+		return size == 0; 
 	}
 	
+    /**
+     * Gets the number of elements in the list.
+     * @return size of the list
+     */	
 	@Override
-	public int size() { //returns how mny elements are in the list 
+	public int size() { 
 		return size;
-		
 	}
-	
+	 /**
+     * Removes all elements from the list.
+     */
 	@Override
-	public void clear() { //removes all elements from the list 
-		head = null; //removes all nodes
-		size = 0; //resets size to 0 
+	public void clear() { 
+		head = null; 
+		size = 0; 
 	}
-	
+
+	 /**
+     * Adds a new element at the beginning of the list.
+     * @param data data to add
+     */
 	@Override
-	public void prepend(Object data) { //adds a new element at the beginning of the list
-		Node newNode = new Node(data); //creates a new node holding the data
-		newNode.setNext(head); //new node points to the old first node 
-		head = newNode; //new node becomes the first node 
-		size++; // increase the list size by 1 
+	public void prepend(Object data) { 
+		Node newNode = new Node(data); 
+		newNode.setNext(head); 
+		head = newNode; 
+		size++; 
 	}
-	
+	/**
+	* Adds a new element to the end of the list.
+	* @param data data to add
+	*/
 	@Override
-	public void append(Object data) { // adds a new element to the end of the list 
-		Node newNode = new Node(data); //create a new node
-		if (head == null) { //if the list is empty 
-			head = newNode; //new node becomes the first node
+	public void append(Object data) { 
+		Node newNode = new Node(data); 
+		if (head == null) {  
+			head = newNode; 
 		}
-		else { //start at the first node 
+		else {
 			Node current = head;
-			while (current.getNext() != null) { //move thru the list until we reach the last node 
+			while (current.getNext() != null) { 
 				current = current.getNext();
 			}
-			current.setNext(newNode); //attach the new node at the end 
+			current.setNext(newNode); 
 		}
 		
-		size++; //increase size by 1 
+		size++;  
 	}
 	
-	//helper method retunrs the node at a specific spot
-	//should be used by insert replace delete and retrieve 
+    /**
+     * Helper method that returns the node at a specific index.
+     * Used by insert, replace, delete, and retrieve.
+     * @param index index of the node to find
+     * @return node at the given index
+     * @throws IndexOutOfBoundsException if the index is invalid
+     */
 	protected Node getNode(int index) {
-		if (index < 0 || index >= size) { //if the index is outside the valid range thows an error
+		if (index < 0 || index >= size) { 
 			throw new IndexOutOfBoundsException();
 		}
-		Node current = head; //Start at the first Node
-		//move forward 'index' times to reach the correct node 
+		Node current = head; 
+		
 		for (int i =0; i < index; i++) { 
 			current = current.getNext();
 		}
-		return current; //return the node we found 
+		return current; 
 		
 	}
+	
+    /**
+     * Gets the data stored at the specified index.
+     * @param index index of the element to retrieve
+     * @return data stored at the index
+     * @throws IndexOutOfBoundsException if the index is invalid
+     */
+	
     @Override
     public Object retrieve(int index) {
-        //get the node at the index
     	Node node = getNode(index);
     	return node.getData();
     }
-	
-	
+
+	/**
+     * Inserts a new node at a specific position in the list.
+     * @param data data to insert
+     * @param index position to insert at
+     * @throws IndexOutOfBoundsException if the index is invalid
+     */
     @Override
-    // adds a new node at a specific position in the list
     public void insert(Object data, int index) {
-    	if (index < 0 || index > size) { // this should check if the index is outside the valid range
-    		throw new IndexOutOfBoundsException(); // is this the exception we want to use for all of them?
+    	if (index < 0 || index > size) { 
+    		throw new IndexOutOfBoundsException(); 
    }
-    	  if (index == 0) { //if we are inserting at the begining, we can reuse the prepend function from earlier 
+    	  if (index == 0) {  
     	        prepend(data);
     	        return;
     	    }
 
-    	    Node newNode = new Node(data); // This should hold the data
+    	    Node newNode = new Node(data); 
 
-    	    Node previous = getNode(index - 1); // this finds the node before the insert position 
-    	    newNode.setNext(previous.getNext()); // new node points to the nextr node in the list 
-    	    previous.setNext(newNode); // this should make the previous node point to the new node
+    	    Node previous = getNode(index - 1); 
+    	    newNode.setNext(previous.getNext()); 
+    	    previous.setNext(newNode); 
 
-    	    size++; // increase list size by 1
+    	    size++; 
     }
-
+	
+    /**
+     * Replaces the data at a specific index.
+     * @param data new data to store
+     * @param index index of the element to replace
+     * @throws IndexOutOfBoundsException if the index is invalid
+     */
     @Override
-    // This should replace the data at a specific index
     public void replace(Object data, int index) { 
-        Node node = getNode(index);   // get the node at that index
-        node.setData(data);           // update the data at that node
+        Node node = getNode(index);
+        node.setData(data);      
     }
-
+	
+    /**
+     * Removes the node at a specific index.
+     * @param index index of the element to delete
+     * @throws IndexOutOfBoundsException if the index is invalid
+     */
     @Override
-    // this will remove a node at a specific index
     public void delete(int index) {
-        if (index < 0 || index >= size) { // make surte the index is in the valid range of our list
-            throw new IndexOutOfBoundsException(); // repeated exception 
+        if (index < 0 || index >= size) { 
+            throw new IndexOutOfBoundsException(); 
         }
-        
-        // If we want to remove the first node
+
         if (index == 0) {
-            head = head.getNext(); // move the head to the next node
-            size--; // reduce the list size
+            head = head.getNext(); 
+            size--; 
             return;
         }
 
-        Node previous = getNode(index - 1); // find the node before the one we want to delete
-        Node toDelete = previous.getNext(); // this will be the node we are removing 
+        Node previous = getNode(index - 1); 
+        Node toDelete = previous.getNext(); 
 
         previous.setNext(toDelete.getNext());
-        // This should skip the deleted node and reconnect the list again
+        
 
-        size--; // we have to reduce the list size when deleting 
+        size--; 
     }
 
-
+    /**
+     * Searches the list and returns the index of matching data.
+     * @param data data to search for
+     * @return index of the matching element, or -1 if not found
+     */
     @Override
-    // This should search the list and return the index of matching data
     public int indexOf(Object data) {
-        Node current = head; // start at the first node
-        int index = 0; // should keep track of the position in the list
-
-        // this should move through the list until it reaches the end
-        while (current != null) {
-            if (current.getData().equals(data)) { // checks if the data matches
-                return index;
-                // this should return the index where it found the data 
+        Node current = head; 
+        int index = 0; 
+		
+        if ((current.getData() == null && data == null) ||
+			(current.getData() != null && current.getData().equals(data))) {
+			return index;
+}
             }
 
-            current = current.getNext(); // moves to the next node
-            index++; // this should increase the index counter
+            current = current.getNext(); 
+            index++; 
         }
 
-        return -1 ; // a placeholder for if data isnt found. it compiles wrong with a string so I just made it a negative number
+        return -1 ; 
     }
-
+    /**
+     * Checks if the list contains a specific value.
+     * @param data data to search for
+     * @return true if the value exists in the list
+     */
     @Override
-    // checks if the list contains a specific value
     public boolean contains(Object data) {
         return indexOf(data) != -1;
-        // if the index returns the data, return truw to confirm
     }
 }
 
