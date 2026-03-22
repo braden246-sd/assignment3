@@ -1,6 +1,11 @@
 package sait.sll.utility;
 import java.io.Serializable;
 
+/**
+ * Represents a node in a singly linked list.
+ * Stores data and a reference to the next node.
+ */
+
 public class Node implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -10,8 +15,6 @@ public class Node implements Serializable {
 	public Node(Object data) {
 		this.data = data;
 		this.next = null; //null because every new node starts out with no connection to any other node
-		
-		
 	}
 	
 	public Object getData() {
@@ -26,7 +29,7 @@ public class Node implements Serializable {
 		return next;
 	}
 	
-	public void setNext( Node next) {
+	public void setNext(Node next) {
 		this.next = next;
 	}
 	
