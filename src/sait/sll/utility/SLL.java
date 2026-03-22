@@ -167,8 +167,7 @@ public class SLL implements LinkedListADT, Serializable {
         Node toDelete = previous.getNext(); 
 
         previous.setNext(toDelete.getNext());
-        
-
+		
         size--; 
     }
 
@@ -185,12 +184,10 @@ public class SLL implements LinkedListADT, Serializable {
         if ((current.getData() == null && data == null) ||
 			(current.getData() != null && current.getData().equals(data))) {
 			return index;
-}
-            }
-
+		}
+		
             current = current.getNext(); 
             index++; 
-        }
 
         return -1 ; 
     }
