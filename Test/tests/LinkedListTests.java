@@ -266,6 +266,86 @@ class LinkedListTests {
 	    assertEquals("c", this.linkedList.retrieve(2));
 	    assertEquals("b", this.linkedList.retrieve(3));
 	}
-		
+		/**
+	 * Tests inserting an element at the end of the list using the insert method.
+	 * Verifies that the element is placed at the correct position and that
+	 * the list size updates correctly.
+	 */
+	@Test
+	void testInsertAtEnd() {
+	    this.linkedList.append("a");
+	    this.linkedList.append("b");
+	    this.linkedList.append("c");
+
+	    this.linkedList.insert("d", 3);
+
+	    // Verify correct order after insertion
+	    assertEquals("a", this.linkedList.retrieve(0));
+	    assertEquals("b", this.linkedList.retrieve(1));
+	    assertEquals("c", this.linkedList.retrieve(2));
+	    assertEquals("d", this.linkedList.retrieve(3));
+
+	    // Verify size increased
+	    assertEquals(4, this.linkedList.size());
+	}
+
+	/**
+	 * Tests deleting the first node (head) of the list.
+	 * Verifies that the head is updated correctly and the list shifts left.
+	 */
+	@Test
+	void testDeleteFirstNode() {
+	    this.linkedList.append("a");
+	    this.linkedList.append("b");
+	    this.linkedList.append("c");
+
+	    this.linkedList.delete(0);
+
+	    // Verify first element is removed and list shifts
+	    assertEquals("b", this.linkedList.retrieve(0));
+	    assertEquals("c", this.linkedList.retrieve(1));
+
+	    // Verify size decreased
+	    assertEquals(2, this.linkedList.size());
+	}
+
+	/**
+	 * Tests deleting the last node (tail) of the list.
+	 * Verifies that the last element is removed and the list size updates.
+	 */
+	@Test
+	void testDeleteLastNode() {
+	    this.linkedList.append("a");
+	    this.linkedList.append("b");
+	    this.linkedList.append("c");
+
+	    this.linkedList.delete(2);
+
+	    // Verify last element is removed
+	    assertEquals("a", this.linkedList.retrieve(0));
+	    assertEquals("b", this.linkedList.retrieve(1));
+
+	    // Verify size decreased
+	    assertEquals(2, this.linkedList.size());
+	}
+
+	/**
+	 * Tests clearing the entire list.
+	 * Verifies that all elements are removed, the list is empty,
+	 * and the size is reset to zero.
+	 */
+	@Test
+	void testClearList() {
+	    this.linkedList.append("a");
+	    this.linkedList.append("b");
+	    this.linkedList.append("c");
+
+	    this.linkedList.clear();
+
+	    // Verify list is empty
+	    assertTrue(this.linkedList.isEmpty());
+
+	    // Verify size reset
+	    assertEquals(0, this.linkedList.size());
 	}
 }
