@@ -1,3 +1,34 @@
+/*
+* Created by: Patrick Bouley, Braden Ouellet, Ian Vanderkley
+* Date: March 24, 2026
+*
+* Description:
+* This program implements a Singly Linked List (SLL) data structure
+* using the LinkedListADT interface.
+*
+* Features:
+* - Add elements to the beginning of the list (prepend)
+* - Add elements to the end of the list (append)
+* - Insert elements at a specific index
+* - Replace elements at a given index
+* - Remove elements from the list
+* - Retrieve elements by index
+* - Search for elements using indexOf and contains
+* - Clear all elements from the list
+* - Track and return the size of the list
+*
+* The linked list is composed of Node objects, where each node stores
+* data and a reference to the next node in the sequence.
+*
+* The implementation uses a helper method (getNode) to simplify traversal
+* and improve code readability.
+*
+* The list supports serialization, allowing the object and its contents
+* to be saved and restored.
+*
+* All methods follow the requirements defined in the LinkedListADT interface.
+*/
+
 package sait.sll.utility;
 
 import java.io.Serializable;
